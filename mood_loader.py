@@ -1,6 +1,6 @@
 
 import mood_time
-from mood import Mood
+from journal import Journal
 
 class MoodLoader:
 
@@ -12,9 +12,9 @@ class MoodLoader:
 
 	def getCurrentMood(self):
 		# TODO: Temporary for testing
-		return Mood(self._xLen, self._yLen, self._zLen)
+		return Journal(self._xLen, self._yLen, self._zLen)
 
 	def getNextMood(self):
 		# TODO: Temporary for testing
-		return Mood(self._xLen, self._yLen, self._zLen, mood_time.current_time_sec() + 30.0)
+		return Journal(self._xLen, self._yLen, self._zLen, mood_time.current_time_sec() + 30.0)
 

@@ -18,13 +18,13 @@ class MoodEngine:
 		while(True):
 			startTimingMs = mood_time.current_timing_ms() 
 			print "startTimingMs {}".format(startTimingMs)
-			print "nextMood getTimingMs {}".format(nextMood.getTimingMs())
+			print "nextMood getTimingMs {}".format(nextMood.timingMs)
 			# Check if we are transitioning into our next mood
-			if startTimingMs >= nextMood.getTimingMs() - fadeSpeedMs / 2:
+			if startTimingMs >= nextMood.timingMs - fadeSpeedMs / 2:
 				print "A"
 
 				# We are transitioning, but are we done transitioning?
-				if startTimingMs >= nextMood.getTimingMs() + fadeSpeedMs / 2:
+				if startTimingMs >= nextMood.timingMs + fadeSpeedMs / 2:
 					print "B"
 					# We are done transitioning, change our currentMood
 					# and load the next mood.
@@ -34,7 +34,7 @@ class MoodEngine:
 				else:
 					print "C"
 					# We are still transitioning
-					timeDiffMs = nextMood.getTimingMs() + fadeSpeedMs / 2 - startTimingMs;
+					timeDiffMs = nextMood.timingMs + fadeSpeedMs / 2 - startTimingMs;
 					fadePercent = 100.0 - timeDiffMs * 100.0 / fadeSpeedMs
 
 			else:
