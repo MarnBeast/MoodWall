@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-from mood_loader import MoodLoader
+from journal_loader import JournalLoader
 from view_controller import ViewController
 from mood_engine import MoodEngine
 
@@ -13,10 +13,10 @@ def main():
 	yLen = 60
 	zLen = 1
 
-	moodLoader = MoodLoader(xLen, yLen, zLen)
+	journalLoader = JournalLoader(xLen, yLen, zLen)
 	viewController = ViewController()
 
-	moodEngine = MoodEngine(moodLoader, viewController)
+	moodEngine = MoodEngine(journalLoader, viewController)
 	moodEngine.start(tickSpeedMs, fadeSpeedMs)
 
 
