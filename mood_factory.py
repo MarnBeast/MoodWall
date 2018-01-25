@@ -10,8 +10,8 @@ class MoodFactory:
 		self._zLen = zLen
 	
 
-	def makeMood(self):
+	def makeMood(self, moodString):
 		# TODO: Temporary for testing
-		return Mood(self._xLen, self._yLen, self._zLen)
+		return Mood(moodString, self._xLen, self._yLen, self._zLen)
 
 

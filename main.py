@@ -13,7 +13,9 @@ def main():
 	yLen = 60
 	zLen = 1
 
-	journalLoader = JournalLoader(xLen, yLen, zLen)
+	journalCsv = 'tempMarnsJournal.csv'
+
+	journalLoader = JournalLoader(xLen, yLen, zLen, journalCsv)
 	viewController = ViewController()
 
 	moodEngine = MoodEngine(journalLoader, viewController)

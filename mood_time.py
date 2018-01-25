@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 import time
-
+from datetime import datetime
 
 # To time this correctly, we want to get time ignoring the year
 # in order to match dates from last year up with this year. 
@@ -18,7 +18,10 @@ def _calc_jan1ms():
 	return jan1_ms
 
 _jan1Ms = _calc_jan1ms()
+_epocDatetime = datetime(1970,1,1)
 
+def datetime_to_time_sec(datetimeObj):
+	return (datetimeObj - _epocDatetime).total_seconds()
 
 def current_time_sec():
 	return time.time()

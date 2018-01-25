@@ -16,6 +16,9 @@ class MoodEngine:
 		fadePercent = 0.0
 
 		while(True):
+			print str(currentJournal)
+			print str(nextJournal)
+			
 			startTimingMs = mood_time.current_timing_ms() 
 			print "startTimingMs {}".format(startTimingMs)
 			print "nextJournal getTimingMs {}".format(nextJournal.timingMs)
