@@ -15,6 +15,12 @@ class JournalLoader:
 		self._journalCsv = journalCsv
 	
 		self._moodFactory = MoodFactory(self._xLen, self._yLen, self._zLen)
+		self._journalList = []
+
+		self._testJournal =  Journal(self._xLen, self._yLen, self._zLen, 0)
+		self._testJournal.addMood(self._moodFactory.makeMood("TestMood"), 100)
+	
+
 
 
 	def loadJournals(self):
@@ -47,6 +53,9 @@ class JournalLoader:
 				journal.weights = [int(w) for w in row[7].split(",")]
 	
 				journalList.append(journal)
+
+		self._journalList = journalList
+		print "list: " + str(len(journalList)) + " self: " + str(len(self._journalList))
 		return journalList
 
 
@@ -67,14 +76,36 @@ class JournalLoader:
 		return moodList
 
 	def getCurrentJournal(self):
-		journals = self.loadJournals()
-		return journals[0]		
+		currentTimingMs = mood_time.current_timing_ms()
+		retJournal = self._testJournal
+
+		#print "curr self: " + str(len(self._journalList))
+		for journal in self._journalList:
+			if retJournal is self._testJournal:
+				retJournal = journal
+
+			#print "now " + str(currentTimingMs) + " then " + str(journal.timingMs) + " " + str(journal)
+			if currentTimingMs > journal.timingMs and \
+			   journal.timingMs > retJournal.timingMs:
+				retJournal = journal
+				
+		#print "CurrentJournal: " + str(retJournal)
+		return retJournal		
 	
 	def getNextJournal(self):
-		# TODO: Temporary for testing
-		journal =  Journal(self._xLen, self._yLen, self._zLen, mood_time.current_time_sec() + 30.0)
-		journal.addMood(self._moodFactory.makeMood("TMood"), 40)
-		journal.addMood(self._moodFactory.makeMood("UMood"), 60)
-		return journal
+		currentTimingMs = mood_time.current_timing_ms()
+		retJournal = self._testJournal
 
+		#print "next self: " + str(len(self._journalList))
+		for journal in self._journalList:
+	
+			#print "now " + str(currentTimingMs) + " then " + str(journal.timingMs) + " " + str(journal)	
+			if currentTimingMs < journal.timingMs:
+				if retJournal is self._testJournal or \
+				   journal.timingMs < retJournal.timingMs:
+					retJournal = journal
 
+		#print "NextJournal: " + str(retJournal)				
+		return retJournal		
+	
+	
